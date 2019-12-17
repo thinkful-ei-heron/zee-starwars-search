@@ -9,31 +9,31 @@ import starWars from './starwars.svg';
 import './App.css';
 
 export default class App extends Component {
-  constructo(props) {
+  constructor(props) {
     super(props);
 
-    this.BASE_URL= 'https://swapi.co/api/';
+    this.BASE_URL = 'https://swapi.co/api/';
     this.state = {
       data: [],
       searching: false
     };
   }
-  
+
   componentDidMount() {
     history.push('/');
   }
 
-  search = (searchInput, filter) => {
+  search = (searchTerm, filter) => {
     history.push('/');
     this.setState({ searching: true });
-    fetch(`${this.BASE_URL}${filter}${searchInput ? '/?search=' + searchInput : ''}`)
+    fetch(`${this.BASE_URL}${filter}${searchTerm ? '/?search=' + searchTerm : ''}`)
       .then(res => res.json())
       .then(data => {
-        if(data.next)
+        if (data.next)
           this.getAll(data).then(results => {
-            let realResults = [];
-            results.forEach(arr => arr.forEach(item => realResults.push(item)));
-            this.setState({ data: realResults, searching: false });
+            let flatResults = [];
+            results.forEach(arr => arr.forEach(item => flatResults.push(item)));
+            this.setState({ data: flatResults, searching: false });
             history.push(`/results/${filter}`);
           });
         else {
@@ -45,7 +45,7 @@ export default class App extends Component {
   };
 
   getAll(data, results = []) {
-    if(!data.next) return results;
+    if (!data.next) return results;
 
     return fetch(`${data.next}`)
       .then(res => res.json())
@@ -57,7 +57,60 @@ export default class App extends Component {
   }
 
   routeByType() {
-    
+    if (this.state.data.length > 0) {
+      return this.state.data.map(dataObj => (
+        <li className="outerLi">
+          <ul className="innerList">
+            <Route
+              path="/results/films"
+              render={() => <Results title={dataObj.title} director={dataObj.director} />}
+            />
+            <Route
+              path="/results/people"
+              render={() => <Results name={dataObj.name} gender={dataObj.gender} />}
+            />
+            <Route
+              path="/results/planets"
+              render={() => <Results name={dataObj.name} climate={dataObj.climate} />}
+            />
+            <Route
+              path="/results/species"
+              render={() => <Results name={dataObj.name} classification={dataObj.classification} />}
+            />
+            <Route
+              path="/results/starships"
+              render={() => <Results name={dataObj.name} manufacturer={dataObj.manufacturer} />}
+            />
+            <Route
+              path="/results/vehicles"
+              render={() => <Results name={dataObj.name} manufacturer={dataObj.manufacturer} />}
+            />
+          </ul>
+        </li>
+      ));
+    } else return <li className="noResults">No results found for this search</li>;
+  }
+
+  render() {
+    return (
+      <>
+        <Route path="/">
+          <header>
+            <img className="logo" src={starWars} alt="star wars logo" />
+            <h1>Search App</h1>
+          </header>
+
+          <Search search={this.search} />
+        </Route>
+        <main className="App">
+          <ErrorPage>
+            <ul className="searchResults">
+              <Route path="/" render={() => (this.state.searching ? <Loading /> : <div></div>)} />
+              <Route path="/results" render={() => this.routeByType()} />
+            </ul>
+          </ErrorPage>
+        </main>
+      </>
+    );
   }
 }
-
