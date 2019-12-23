@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-color: gold;
 }
 
 body {
@@ -12,4 +13,30 @@ body {
 a {
   color: #333;
   text-decoration: none;
+ 
 }
+
+h1 {
+  flex-direction: column;
+  text-align: center;
+  margin-top: 30px;
+  font-weight: bolder;
+}
+
+.search {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  padding: 20px;
+  margin-top: 10px;
+  font-weight: bolder;
+
+}
+
+.searchTerm .filterLabel {
+  padding: 10px;
+  
+}
+
+
+

@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "alias": "[zeecelest]-starwars-search-app",
+    "name": "starwars-search-app",
+    "routes": [
+        { "handle": "filesystem" },
+        { "src": "/.*", "dest": "/index.html" }
+    ]
+  }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import history from './components/history';
 import Search from './components/Search';
 import Results from './components/Results';
 import ErrorPage from './components/ErrorPage.js';
 import Loading from './components/loading';
-import starWars from './starwars.svg';
+// import starWars from './starwars.svg';
 import './App.css';
 
 export default class App extends Component {
@@ -59,7 +59,7 @@ export default class App extends Component {
   routeByType() {
     if (this.state.data.length > 0) {
       return this.state.data.map(dataObj => (
-        <li className="outerLi">
+        <li className="outerList">
           <ul className="innerList">
             <Route
               path="/results/films"
@@ -96,8 +96,7 @@ export default class App extends Component {
       <>
         <Route path="/">
           <header>
-            <img className="logo" src={starWars} alt="star wars logo" />
-            <h1>Search App</h1>
+            <h1>Star Wars Search App</h1>
           </header>
 
           <Search search={this.search} />

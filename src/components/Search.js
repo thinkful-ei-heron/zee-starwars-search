@@ -14,7 +14,7 @@ export default class Search extends Component {
   render() {
     return (
       <form className="search" onSubmit={e => this.handleSubmit(e)}>
-        <label htmlFor="searchTerm">Search for:</label>
+        <label htmlFor="searchTerm" className="searchTerm">Search for:</label>
         <select name="filter" id="filter" onChange={e => this.setState({ filter: e.target.value })}>
           <option value="films">Films</option>
           <option value="people">People</option>
