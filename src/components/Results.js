@@ -7,7 +7,7 @@ export default function Films(props) {
   return keys.map(key => {
     return (
       <li>
-        <span className="property">{key}:</span>
+        <span className="text">{key}:</span>
         {props[key]}
       </li>
     );
