@@ -15,7 +15,7 @@ export default class Search extends Component {
     return (
       <form className="search" onSubmit={e => this.handleSubmit(e)}>
         <label htmlFor="searchTerm" className="searchTerm">Search for:</label>
-        <select name="filter" id="filter" onChange={e => this.setState({ filter: e.target.value })}>
+        <select name="filter" className="filterOption" onChange={e => this.setState({ filter: e.target.value })}>
           <option value="films">Films</option>
           <option value="people">People</option>
           <option value="planets">Planets</option>
@@ -29,11 +29,11 @@ export default class Search extends Component {
         <input
           type="text"
           name="searchTerm"
-          id="searchTerm"
+          id="searchTermInput"
           placeholder="ex: Luke Skywalker"
           onChange={e => this.setState({ searchTerm: e.target.value })}
         />
-        <button type="submit">Submit</button>
+        <button type="submit" className="button">Submit</button>
       </form>
     );
   }

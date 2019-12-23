@@ -63,7 +63,7 @@ export default class App extends Component {
           <ul className="innerList">
             <Route
               path="/results/films"
-              render={() => <Results title={dataObj.title} director={dataObj.director} />}
+              render={() => <Results title={dataObj.title}   director={dataObj.director} />}
             />
             <Route
               path="/results/people"

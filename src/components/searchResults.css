@@ -1,0 +1,7 @@
+.searchResults {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 50px;
+    line-height: 2.0;
+}
